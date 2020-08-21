@@ -12,11 +12,14 @@ app.secret_key = os.urandom(8)
 # RENDERING INDEX
 @app.route('/dashboard')
 def index():
-    usuario = session['username']
+    if 'username' in session:
+        usuario = session['username']
 
-    ##BUSCAR FORM DE USUARIO
+        ##BUSCAR FORM DE USUARIO
 
-    return render_template('index.html', username=usuario)
+        return render_template('index.html', username=usuario)
+    else:
+        return redirect('/')
 
 
 @app.route('/')
@@ -37,7 +40,10 @@ def loginOUT():
 
 @app.route('/crear')
 def form():
-    return render_template('register.html')
+    if 'username' in session:
+        return render_template('register.html')
+    else:
+        return redirect('/')
 
 
 # SIGN IN
