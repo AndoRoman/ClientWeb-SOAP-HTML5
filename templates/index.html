@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Client - SOAP</title>
+    <link rel="icon" href="static/Logo_PUCMM.png" type="image/png">
+    <link href="static/styles.css" rel="stylesheet"/>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet">
+    <script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4 text-center">Mis Formularios</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active"><a href="/loginOUT">Cerrar Sesion</a></li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                <a href="/crear" class="btn btn-warning btn-lg">Crear Nuevo Formulario</a>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                Formularios Creados por {{username}}
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table cellspacing="0" class="table table-bordered" id="dataTable" width="100%">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Sector</th>
+                            <th>Nivel Escolar</th>
+                            <th>Latitud</th>
+                            <th>Longitud</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Sector</th>
+                            <th>Nivel Escolar</th>
+                            <th>Latitud</th>
+                            <th>Longitud</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        {% for form in forms %}
+                        <tr>
+                            <td class="align-middle" >{{ form.id|e }}</td>
+                            <td class="align-middle" >{{ form.nombre|e }}</td>
+                            <td class="align-middle" >{{ form.Sector|e }}</td>
+                            <td class="align-middle" >{{ form.NivelEscolar|e }}</td>
+                            <td class="align-middle" >{{ form.ubicacion.longitud|e }}</td>
+                            <td class="align-middle" >{{ form.ubicacion.latitud|e }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

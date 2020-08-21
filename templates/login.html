@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="icon" href="static/Logo_PUCMM.png" type="image/png">
+    <link href="static/styles.css" rel="stylesheet"/>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet">
+    <script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body class="bg-primary">
+    <div class="container">
+        <div class="card shadow-lg">
+            <div class="card-head">
+                <div class="alert alert-primary" role="alert">
+                    <h2 class="text-center">Bienvenido a Nuestro Cliente SOAP</h2>
+                    <h4 class="text-center">Por favor, para iniciar ingrese sus credenciales</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <form method="post" action="/signin">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Usuario</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="user" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Contraseña</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" name="pass" required>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">Ingresar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>
