@@ -33,9 +33,20 @@
                                 <div class="invalid-feedback">
                                     Llene este campoo
                                 </div>
+                                <div class="form-group">
+                                    <select class="custom-select mr-sm-2" id="nivelEscolar" name="nivelEscolar" required>
+                                        <option selected> Nivel Academico</option>
+                                        <option value="Basico">Basico</option>
+                                        <option value="Medio">Medio</option>
+                                        <option value="Grado">Grado</option>
+                                        <option value="Maestria">Maestria</option>
+                                        <option value="Doctorado">Doctorado</option>
+                                    </select>
+                                </div>
                             </div>
                             <input type="hidden" name="lati" id="lati" value="">
                             <input type="hidden" id="longi" name="longi" value="">
+
                             <br>
                             <div class="col-md-12">
                                 <fieldset class="input-group">
@@ -68,6 +79,18 @@
         </div>
     </div>
 </main>
-<script src="/static/js.js"></script>
+<script>
+    //--GEOLOCATION-----//
+    function GEOLOCATION(){
+
+        function success(pos){
+            console.log('Working...')
+            var crd = pos.coords
+            document.querySelector("#lati").value = crd.latitude;
+            document.querySelector("#longi").value = crd.longitude;
+        }
+        navigator.geolocation.getCurrentPosition(success)
+    }
+</script>
 </body>
 </html>

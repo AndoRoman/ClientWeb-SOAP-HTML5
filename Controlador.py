@@ -1,13 +1,24 @@
+import base64
+import filetype
 from flask import *
 import os
 
 # STARTING WEB SERVER
-import Client
+import ClientSoap
 
 app = Flask(__name__)
 
 # Set the secret key to 'secret' session
 app.secret_key = os.urandom(8)
+
+
+# CLASS FOTO
+class Foto:
+  def __init__(self, base64, mimetype, filename):
+    self.base64 = base64
+    self.mimetype = mimetype
+    self.filename = filename
+
 
 # RENDERING INDEX
 @app.route('/dashboard')
@@ -17,7 +28,7 @@ def index():
 
         ##BUSCAR FORM DE USUARIO
 
-        return render_template('index.html', username=usuario)
+        return render_template('index.html', forms=ClientSoap.getForms(), username=usuario)
     else:
         return redirect('/')
 
@@ -53,7 +64,7 @@ def signin():
         user = request.form['user']
         password = request.form['pass']
 
-        if Client.authentication(user, password):
+        if ClientSoap.authentication(user, password):
             session['username'] = user
             return redirect('/dashboard')
         else:
@@ -66,12 +77,26 @@ def register():
     if request.method == 'POST':
         name = request.form['nombre']
         sector = request.form['sector']
+        nivelEscolar = request.form['nivelEscolar']
         latitud = request.form['lati']
         longitud = request.form['longi']
-        f = request.files['thefiles']
+        pictureUpload = request.files['thefiles']
+        usuario = session['username']
 
-        # SAVE ON SERVER
-        if Client.NewForm(name, sector, latitud, longitud, f):
+        # BASE64 BYTES OF PICTURE
+        pictureUpload.save(pictureUpload.filename)
+        with open(pictureUpload.filename, "rb") as f:
+            data = f.read()
+
+        encodedBytes = base64.b64encode(str(data[0]).encode("utf-8"))
+        filename = encodedBytes.title()
+        mimetype = filetype.guess(pictureUpload)
+
+        # Create a Object Foto
+        img = Foto(encodedBytes, mimetype, filename)
+
+        # SAVE ON SERVER -> ERROR USUARIO object
+        if ClientSoap.NewForm(name, sector, nivelEscolar, usuario, latitud, longitud, img):
             print('New Form Created Succes!')
             return redirect('/dashboard')
         else:
