@@ -14,10 +14,10 @@ app.secret_key = os.urandom(8)
 
 # CLASS FOTO
 class Foto:
-  def __init__(self, base64, mimetype, filename):
-    self.base64 = base64
-    self.mimetype = mimetype
-    self.filename = filename
+    def __init__(self, base64, mimetype, filename):
+        self.base64 = base64
+        self.mimetype = mimetype
+        self.filename = filename
 
 
 # RENDERING INDEX
@@ -28,7 +28,7 @@ def index():
 
         ##BUSCAR FORM DE USUARIO
 
-        return render_template('index.html', forms=ClientSoap.getForms(), username=usuario)
+        return render_template('index.html', forms=ClientSoap.getForms(usuario), username=usuario)
     else:
         return redirect('/')
 
@@ -93,7 +93,7 @@ def register():
         mimetype = filetype.guess(pictureUpload)
 
         # Create a Object Foto
-        img = Foto(encodedBytes, mimetype, filename)
+        img = Foto(base64=encodedBytes, mimetype=mimetype, filename=filename)
 
         # SAVE ON SERVER -> ERROR USUARIO object
         if ClientSoap.NewForm(name, sector, nivelEscolar, usuario, latitud, longitud, img):
